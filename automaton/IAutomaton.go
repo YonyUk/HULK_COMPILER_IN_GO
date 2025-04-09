@@ -20,4 +20,6 @@ type IAutomaton[T comparable] interface {
 	AddState(state IState[T])
 	// Return the alphabet of this automaton
 	Alphabet() []T
+	// Restart this automaton
+	Restart()
 }

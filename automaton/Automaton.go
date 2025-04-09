@@ -64,6 +64,10 @@ func (a *Automaton[T]) ToDeterministic() IAutomaton[T] {
 	return NewAutomaton(InitialState, States, a.alphabet)
 }
 
+func (a *Automaton[T]) Restart() {
+	a.current = a.start
+}
+
 func (a *Automaton[T]) toDeterministic() (string, [][]IState[T], map[string]map[T]string) {
 	// calculando las clausuras
 	initial, clousures := a.get_clousures()
