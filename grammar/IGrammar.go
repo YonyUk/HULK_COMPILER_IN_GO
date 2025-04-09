@@ -9,5 +9,7 @@ type IGrammar interface {
 	// The start symbol of this grammar
 	StartSymbol() IGrammarSymbol
 	// Adds a new production to this grammar
-	AddProduction(symbol IGrammarSymbol, symbols []IGrammarSymbol)
+	AddProduction(symbol IGrammarSymbol, symbols []IGrammarSymbol) error
+	// Gets the productions of one symbol
+	GetProductions(symbol IGrammarSymbol) [][]IGrammarSymbol
 }

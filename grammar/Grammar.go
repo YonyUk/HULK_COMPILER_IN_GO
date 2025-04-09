@@ -12,8 +12,8 @@ type Grammar struct {
 	productions   map[IGrammarSymbol][][]IGrammarSymbol
 }
 
-func NewGrammar(start IGrammarSymbol) Grammar {
-	return Grammar{
+func NewGrammar(start IGrammarSymbol) *Grammar {
+	return &Grammar{
 		terminals:     []IGrammarSymbol{},
 		non_terminals: []IGrammarSymbol{start},
 		productions:   make(map[IGrammarSymbol][][]IGrammarSymbol),
@@ -65,4 +65,11 @@ func (grammar *Grammar) AddProduction(symbol IGrammarSymbol, symbols []IGrammarS
 	}
 	grammar.productions[symbol] = append(grammar.productions[symbol], symbols)
 	return nil
+}
+
+func (grammar *Grammar) GetProductions(symbol IGrammarSymbol) [][]IGrammarSymbol {
+	if symbol.Type() != NonTerminal {
+		return [][]IGrammarSymbol{}
+	}
+	return grammar.productions[symbol]
 }

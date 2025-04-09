@@ -30,6 +30,7 @@ func Concat[T comparable](aut1 IAutomaton[T], aut2 IAutomaton[T]) IAutomaton[T] 
 	return NewAutomaton(states[start_index], states, alphabet).ToDeterministic()
 }
 
+// Reaturns the automaton that recognizes the union of both languages
 func Union[T comparable](aut1 IAutomaton[T], aut2 IAutomaton[T]) IAutomaton[T] {
 	start := NewState[T](aut1.Start().ID()+"-"+aut2.Start().ID()+"-"+"union", false, false)
 	states := []IState[T]{start}
