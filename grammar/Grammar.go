@@ -33,7 +33,7 @@ func (grammar *Grammar) NonTerminals() []IGrammarSymbol {
 }
 
 func (grammar *Grammar) StartSymbol() IGrammarSymbol {
-	return NewGrammarSymbol(grammar.non_terminals[0].Symbol(), grammar.non_terminals[0].Type())
+	return NewGrammarSymbol(grammar.non_terminals[0].Symbol(), grammar.non_terminals[0].Type(), grammar.non_terminals[0].Epsilon())
 }
 
 func (grammar *Grammar) AddProduction(symbol IGrammarSymbol, symbols []IGrammarSymbol) error {

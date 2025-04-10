@@ -6,4 +6,6 @@ type IGrammarSymbol interface {
 	Symbol() string
 	// Return the type of the symbol in the grammar
 	Type() GrammarSymbolType
+	// True if this symbol is the epsilon symbol
+	Epsilon() bool
 }
