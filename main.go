@@ -52,7 +52,9 @@ func main() {
 		fmt.Println(err)
 	}
 
-	chain := "6789"
+	chain := "680129832"
+
+	fmt.Println(chain[1:len(chain)])
 
 	for _, char := range chain {
 		fmt.Println(aut.Walk(char))
