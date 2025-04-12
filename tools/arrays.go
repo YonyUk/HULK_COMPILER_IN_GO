@@ -55,3 +55,17 @@ func CompareArrays[T comparable](array1 []T, array2 []T) bool {
 	}
 	return true
 }
+
+// Sort an array, the comparer function most return 1 if a > b, -1 if a < b and 0 if a == b
+func Sort[T any](array []T, comparer func(a T, b T) int) []T {
+	for i := 0; i < len(array); i++ {
+		for j := i + 1; j < len(array); j++ {
+			if comparer(array[j], array[i]) == -1 {
+				temp := array[j]
+				array[j] = array[i]
+				array[i] = temp
+			}
+		}
+	}
+	return array
+}

@@ -1,8 +1,6 @@
 package tokens
 
 import (
-	"errors"
-
 	. "hulk.com/app/tools"
 )
 
@@ -13,16 +11,16 @@ type TokenExtractor struct {
 
 func NewTokenExtractor(priorities map[int]TokenType) *TokenExtractor {
 	return &TokenExtractor{
-		priorities: make(map[int]TokenType),
+		priorities: priorities,
 	}
 }
 
-func (extractor *TokenExtractor) GetToken(token_types []TokenType, line int, column int, text string) (IToken, error) {
+func (extractor *TokenExtractor) GetToken(token_types []TokenType, line int, column int, text string) IToken {
 	for _, value := range extractor.priorities {
 		_, err := IndexOf(token_types, func(t TokenType) bool { return t == value })
 		if err == nil {
-			return NewToken(line, column, text, value), nil
+			return NewToken(line, column, text, value)
 		}
 	}
-	return nil, errors.New("token type not found")
+	return NewToken(line, column, text, GarbageToken)
 }

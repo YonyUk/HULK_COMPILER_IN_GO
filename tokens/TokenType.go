@@ -3,7 +3,7 @@ package tokens
 type TokenType int
 
 const (
-	InvalidToken TokenType = iota
+	GarbageToken TokenType = iota
 	KeywordToken
 	SymbolToken
 	OperatorToken

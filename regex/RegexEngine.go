@@ -61,7 +61,7 @@ func (re *RegexEngine) Regex(g IGrammar) (IAutomaton[rune], error) {
 						states[state_index].AddTransition(rune(production[0].Symbol()[0]), states[len(states)-1])
 					}
 				default:
-					return nil, errors.New("Symbol type not defined")
+					return nil, errors.New("This grammar is not regular")
 				}
 			}
 		}
