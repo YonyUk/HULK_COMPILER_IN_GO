@@ -82,6 +82,7 @@ func (l *Lexer) Next() bool {
 			if l.text_pointer == 0 {
 				if l.code[l.text_pointer] == '\n' {
 					l.column = 0
+					l.line++
 				} else {
 					l.column++
 				}

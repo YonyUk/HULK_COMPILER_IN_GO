@@ -6,25 +6,23 @@ import (
 	. "hulk.com/app/hulk"
 	. "hulk.com/app/lexer"
 	. "hulk.com/app/tokens"
+	// . "hulk.com/app/grammar"
+	// . "hulk.com/app/regex"
 	// . "hulk.com/app/tools"
 )
 
 func main() {
 
-	// for r := rune(0); r < rune(256); r++ {
-	// 	fmt.Println(string(r), r)
-	// }
-
-	chain := "\"hello world\" \"here we go\" \n 34e+200 nada_nuevo_01"
-
-	fmt.Println(chain)
+	chain := "\"hello world\" \"here we go\" \n34e+200 nada_nuevo_01 function"
 
 	lexer := NewLexer()
-	lexer.AddTokenExpression(NumberToken, 0, NumberGrammar)
-	lexer.AddTokenExpression(StringToken, 1, StringGrammar)
-	lexer.AddTokenExpression(VariableToken, 2, VariableGrammar)
+	lexer.AddTokenExpression(KeywordToken, 0, KeywordsGrammar)
+	lexer.AddTokenExpression(NumberToken, 1, NumberGrammar)
+	lexer.AddTokenExpression(StringToken, 2, StringGrammar)
+	lexer.AddTokenExpression(VariableToken, 3, VariableGrammar)
 	lexer.LoadCode(chain)
 	for lexer.Next() {
 		fmt.Println(lexer.Current())
 	}
+
 }
