@@ -10,10 +10,19 @@ import (
 )
 
 func main() {
-	chain := "-1e-583 0 0.000001 12.3 -12.3 1 -1 +1 +1e+500 +1e-500 -1e-500 +12.3 -0 +0"
+
+	// for r := rune(0); r < rune(256); r++ {
+	// 	fmt.Println(string(r), r)
+	// }
+
+	chain := "\"hello world\" \"here we go\" \n 34e+200 nada_nuevo_01"
+
+	fmt.Println(chain)
 
 	lexer := NewLexer()
 	lexer.AddTokenExpression(NumberToken, 0, NumberGrammar)
+	lexer.AddTokenExpression(StringToken, 1, StringGrammar)
+	lexer.AddTokenExpression(VariableToken, 2, VariableGrammar)
 	lexer.LoadCode(chain)
 	for lexer.Next() {
 		fmt.Println(lexer.Current())

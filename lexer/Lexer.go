@@ -29,6 +29,8 @@ func NewLexer() *Lexer {
 		automatons:      make(map[TokenType]IAutomaton[rune]),
 		token_extractor: nil,
 		priorities:      make(map[int]TokenType),
+		line:            1,
+		column:          0,
 	}
 }
 
@@ -41,6 +43,8 @@ func (l *Lexer) LoadCode(code string) {
 	l.text_pointer = 0
 	l.text_readed = ""
 	l.code = code
+	l.line = 1
+	l.column = 0
 }
 
 func (l *Lexer) Next() bool {
@@ -63,6 +67,10 @@ func (l *Lexer) Next() bool {
 			}
 		}
 		if walked {
+			if l.code[l.text_pointer] == '\n' {
+				l.column = 0
+				l.line++
+			}
 			last_types = current_types
 			l.text_readed += string(l.code[l.text_pointer])
 			l.text_pointer++
@@ -72,11 +80,17 @@ func (l *Lexer) Next() bool {
 		}
 		if !walked {
 			if l.text_pointer == 0 {
+				if l.code[l.text_pointer] == '\n' {
+					l.column = 0
+				} else {
+					l.column++
+				}
 				l.code = l.code[1:]
 				walked = true
 			} else {
 				l.current_token = l.token_extractor.GetToken(last_types, l.line, l.column, l.text_readed)
 				l.code = l.code[l.text_pointer:]
+				l.column += l.text_pointer
 				l.text_pointer = 0
 				l.text_readed = ""
 			}
