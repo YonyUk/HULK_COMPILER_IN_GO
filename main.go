@@ -2,12 +2,13 @@ package main
 
 import (
 	// . "hulk.com/app/grammar"
-
 	"fmt"
 
 	. "hulk.com/app/hulk"
 
+	. "hulk.com/app/filesystem"
 	. "hulk.com/app/lexer"
+
 	// . "hulk.com/app/regex"
 	. "hulk.com/app/tokens"
 	// . "hulk.com/app/tools"
@@ -15,7 +16,7 @@ import (
 
 func main() {
 
-	chain := "1 + 0.5 - 9e+300 * -1e-3 / 12"
+	// chain := "1 + 0.5 - 9e+300 * -1e-3 / 12"
 
 	map_type_to_str := make(map[TokenType]string)
 
@@ -37,7 +38,11 @@ func main() {
 	lexer.AddTokenExpression(SymbolToken, 4, SymbolGrammar)
 	lexer.AddTokenExpression(NumberToken, 5, NumberGrammar)
 	lexer.AddTokenExpression(StringToken, 6, StringGrammar)
-	lexer.LoadCode(chain)
+
+	reader, _ := NewFileReader("code.hulk")
+	text, _ := reader.ReadFile()
+
+	lexer.LoadCode(text)
 	for lexer.Next() {
 		fmt.Println(lexer.Current(), map_type_to_str[lexer.Current().Type()])
 	}
