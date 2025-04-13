@@ -44,7 +44,7 @@ func (l *Lexer) LoadCode(code string) {
 	l.text_readed = ""
 	l.code = code
 	l.line = 1
-	l.column = 0
+	l.column = 1
 }
 
 func (l *Lexer) Next() bool {
@@ -68,7 +68,7 @@ func (l *Lexer) Next() bool {
 		}
 		if walked {
 			if l.code[l.text_pointer] == '\n' {
-				l.column = 0
+				l.column = 1
 				l.line++
 			}
 			last_types = current_types
@@ -81,7 +81,7 @@ func (l *Lexer) Next() bool {
 		if !walked {
 			if l.text_pointer == 0 {
 				if l.code[l.text_pointer] == '\n' {
-					l.column = 0
+					l.column = 1
 					l.line++
 				} else {
 					l.column++

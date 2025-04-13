@@ -31,7 +31,10 @@ func init() {
 	for _, symbol := range letters {
 		VariableGrammar.AddProduction(start_symbol, []IGrammarSymbol{symbol, tail})
 	}
-
+	for _, symbol := range digits {
+		VariableGrammar.AddProduction(start_symbol, []IGrammarSymbol{symbol, tail})
+	}
+	VariableGrammar.AddProduction(start_symbol, []IGrammarSymbol{down_line, tail})
 	VariableGrammar.AddProduction(tail, []IGrammarSymbol{down_line, tail})
 	for _, symbol := range letters {
 		VariableGrammar.AddProduction(tail, []IGrammarSymbol{symbol, tail})

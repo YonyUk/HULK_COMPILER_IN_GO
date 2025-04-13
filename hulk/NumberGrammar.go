@@ -47,7 +47,7 @@ func init() {
 	NumberGrammar.AddProduction(SignedNumber, []IGrammarSymbol{d7, before_tail})
 	NumberGrammar.AddProduction(SignedNumber, []IGrammarSymbol{d8, before_tail})
 	NumberGrammar.AddProduction(SignedNumber, []IGrammarSymbol{d9, before_tail})
-	NumberGrammar.AddProduction(SignedNumber, []IGrammarSymbol{d0})
+	NumberGrammar.AddProduction(SignedNumber, []IGrammarSymbol{d0, before_tail})
 
 	// Number productions
 	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d1, before_tail})
@@ -59,7 +59,7 @@ func init() {
 	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d7, before_tail})
 	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d8, before_tail})
 	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d9, before_tail})
-	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d0})
+	NumberGrammar.AddProduction(Number, []IGrammarSymbol{d0, before_tail})
 
 	// before_tail productions
 	NumberGrammar.AddProduction(before_tail, []IGrammarSymbol{d0, before_tail})
