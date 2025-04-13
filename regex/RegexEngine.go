@@ -40,7 +40,14 @@ func (re *RegexEngine) Regex(g IGrammar) (IAutomaton[rune], error) {
 						return nil, errors.New("This grammar is not regular, bad production at symbol: " + symbol.Symbol())
 					}
 					trans_state_index, _ := IndexOf(states, func(s IState[rune]) bool { return s.ID() == production[1].Symbol() })
-					states[state_index].AddTransition(rune(production[0].Symbol()[0]), states[trans_state_index])
+					if states[state_index].HasTransition(rune(production[0].Symbol()[0])) {
+						new_state_index, _ := IndexOf(states, func(s IState[rune]) bool {
+							return s.ID() == states[state_index].Next(rune(production[0].Symbol()[0])).ID()
+						})
+						states[new_state_index].Epsilon(states[trans_state_index])
+					} else {
+						states[state_index].AddTransition(rune(production[0].Symbol()[0]), states[trans_state_index])
+					}
 				case NonTerminal:
 					if production[1].Epsilon() {
 						return nil, errors.New("Bad formed grammar")

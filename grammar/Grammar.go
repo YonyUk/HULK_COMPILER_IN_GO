@@ -9,14 +9,14 @@ import (
 type Grammar struct {
 	terminals     []IGrammarSymbol
 	non_terminals []IGrammarSymbol
-	productions   map[IGrammarSymbol][][]IGrammarSymbol
+	productions   map[string][][]IGrammarSymbol
 }
 
 func NewGrammar(start IGrammarSymbol) *Grammar {
 	return &Grammar{
 		terminals:     []IGrammarSymbol{},
 		non_terminals: []IGrammarSymbol{start},
-		productions:   make(map[IGrammarSymbol][][]IGrammarSymbol),
+		productions:   make(map[string][][]IGrammarSymbol),
 	}
 }
 
@@ -40,30 +40,30 @@ func (grammar *Grammar) AddProduction(symbol IGrammarSymbol, symbols []IGrammarS
 	if symbol.Type() == Terminal {
 		return errors.New("The symbols most be a non terminal")
 	}
-	if _, ok := grammar.productions[symbol]; !ok {
-		grammar.productions[symbol] = [][]IGrammarSymbol{}
+	if _, ok := grammar.productions[symbol.Symbol()]; !ok {
+		grammar.productions[symbol.Symbol()] = [][]IGrammarSymbol{}
 	}
-	if _, err := IndexOf(grammar.productions[symbol], func(syms []IGrammarSymbol) bool { return CompareArrays(syms, symbols) }); err == nil {
+	if _, err := IndexOf(grammar.productions[symbol.Symbol()], func(syms []IGrammarSymbol) bool { return CompareArrays(syms, symbols) }); err == nil {
 		return errors.New("The given production already exists")
 	}
-	if _, err := IndexOf(grammar.non_terminals, func(s IGrammarSymbol) bool { return symbol == s }); err != nil {
+	if _, err := IndexOf(grammar.non_terminals, func(s IGrammarSymbol) bool { return symbol.Symbol() == s.Symbol() }); err != nil {
 		grammar.non_terminals = append(grammar.non_terminals, symbol)
 	}
 	for i := 0; i < len(symbols); i++ {
 		switch symbols[i].Type() {
 		case NonTerminal:
-			if _, err := IndexOf(grammar.non_terminals, func(s IGrammarSymbol) bool { return s == symbols[i] }); err != nil {
+			if _, err := IndexOf(grammar.non_terminals, func(s IGrammarSymbol) bool { return s.Symbol() == symbols[i].Symbol() }); err != nil {
 				grammar.non_terminals = append(grammar.non_terminals, symbols[i])
 			}
 		case Terminal:
-			if _, err := IndexOf(grammar.terminals, func(s IGrammarSymbol) bool { return s == symbols[i] }); err != nil {
+			if _, err := IndexOf(grammar.terminals, func(s IGrammarSymbol) bool { return s.Symbol() == symbols[i].Symbol() }); err != nil {
 				grammar.terminals = append(grammar.terminals, symbols[i])
 			}
 		default:
 			continue
 		}
 	}
-	grammar.productions[symbol] = append(grammar.productions[symbol], symbols)
+	grammar.productions[symbol.Symbol()] = append(grammar.productions[symbol.Symbol()], symbols)
 	return nil
 }
 
@@ -71,5 +71,5 @@ func (grammar *Grammar) GetProductions(symbol IGrammarSymbol) [][]IGrammarSymbol
 	if symbol.Type() != NonTerminal {
 		return [][]IGrammarSymbol{}
 	}
-	return grammar.productions[symbol]
+	return grammar.productions[symbol.Symbol()]
 }

@@ -1,6 +1,8 @@
 package grammar
 
-import "strconv"
+import (
+	"strconv"
+)
 
 // Adds a new word to the given grammar
 func AddWordToGrammar(g IGrammar, word string) IGrammar {

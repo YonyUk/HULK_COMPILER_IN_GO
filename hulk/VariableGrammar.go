@@ -28,7 +28,6 @@ func init() {
 		digits = append(digits, NewGrammarSymbol(string(r), Terminal, false))
 	}
 
-	VariableGrammar.AddProduction(start_symbol, []IGrammarSymbol{down_line, tail})
 	for _, symbol := range letters {
 		VariableGrammar.AddProduction(start_symbol, []IGrammarSymbol{symbol, tail})
 	}
