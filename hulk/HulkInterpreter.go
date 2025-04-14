@@ -2,6 +2,7 @@ package hulk
 
 import (
 	. "hulk.com/app/compiler"
+	. "hulk.com/app/hulk/lexical"
 	. "hulk.com/app/interpreter"
 	. "hulk.com/app/lexer"
 	. "hulk.com/app/lexical_analisys"
