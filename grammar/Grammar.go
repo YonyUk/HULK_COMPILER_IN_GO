@@ -84,7 +84,7 @@ func (grammar *Grammar) MakeFirstsAndFollows(endmarker IGrammarSymbol) {
 }
 
 func (grammar *Grammar) FIRST(symbols []IGrammarSymbol) []IGrammarSymbol {
-	epsilon := true
+	epsilon := len(symbols) > 0
 	position := 0
 	result := []IGrammarSymbol{}
 	for epsilon && position < len(symbols) {

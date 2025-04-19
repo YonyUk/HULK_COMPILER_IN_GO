@@ -1,0 +1,15 @@
+package parser
+
+import (
+	. "hulk.com/app/grammar"
+)
+
+// Item LR(0) interface
+type IItemLR0 interface {
+	// A in the production A ---> A.B where A and B are sentence form
+	Head() IGrammarSymbol
+	// Left part of the item
+	LeftTail() []IGrammarSymbol
+	// Right part of the item
+	RightTail() []IGrammarSymbol
+}
