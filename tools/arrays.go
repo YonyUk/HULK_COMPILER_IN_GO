@@ -72,7 +72,7 @@ func Sort[T any](array []T, comparer func(a T, b T) int) []T {
 
 // Sort an array, the comparer function most return 1 if a > b, -1 if a < b and 0 if a == b
 func MergeSort[T any](array []T, comparer func(a T, b T) int) []T {
-	if len(array) == 1 {
+	if len(array) <= 1 {
 		return array
 	}
 	result := merge(MergeSort(array[:int(len(array)/2)], comparer), MergeSort(array[int(len(array)/2):], comparer), comparer)
