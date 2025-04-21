@@ -1,15 +1,18 @@
 package grammar
 
-func GrammarUnion(g1 IGrammar, g2 IGrammar) IGrammar {
-	g_result := NewGrammar(g1.StartSymbol())
-	for _, nt := range g1.NonTerminals() {
-		for _, production := range g1.GetProductions(nt) {
-			g_result.AddProduction(nt, production)
-		}
+func GrammarUnion(grammars []IGrammar) IGrammar {
+	if len(grammars) < 2 {
+		panic("grammars most have at least two elements")
 	}
-	for _, nt := range g2.NonTerminals() {
-		for _, production := range g2.GetProductions(nt) {
-			g_result.AddProduction(nt, production)
+	start_symbol_id := grammars[0].StartSymbol().Symbol()
+	start_symbol := NewGrammarSymbol(start_symbol_id, NonTerminal, false)
+	g_result := NewGrammar(start_symbol)
+	for _, g := range grammars {
+		g_result.AddProduction(start_symbol, []IGrammarSymbol{g.StartSymbol()})
+		for _, nt := range g.NonTerminals() {
+			for _, production := range g.GetProductions(nt) {
+				g_result.AddProduction(nt, production)
+			}
 		}
 	}
 	return g_result
