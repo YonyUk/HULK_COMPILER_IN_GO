@@ -16,12 +16,12 @@ func main() {
 	code, _ := reader.ReadFile()
 	interpreter.Execute(code)
 
-	G := AugmentGrammar(HulkGrammar)
+	// G := AugmentGrammar(HulkGrammar)
 
-	G.MakeFirstsAndFollows(NewGrammarSymbol("$", Terminal, false))
+	// G.MakeFirstsAndFollows(NewGrammarSymbol("$", Terminal, false))
 
-	canonicalCollection := GetCanonicalLR0Collection(G)
-	for _, collection := range canonicalCollection {
-		ShowCollection(collection)
-	}
+	// collections := GetCanonicalLR0Collection(G)
+	// fmt.Println(len(collections))
+
+	NewParserSLRFromGrammar(HulkGrammar, NewGrammarSymbol("$", Terminal, false))
 }
