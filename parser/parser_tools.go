@@ -2,6 +2,8 @@ package parser
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 
 	. "hulk.com/app/grammar"
 	. "hulk.com/app/tools"
@@ -98,4 +100,59 @@ func ShowCollection(collection IItemLR0Collection) {
 	}
 	fmt.Println()
 	fmt.Println()
+}
+
+func DumpParser(parser ParserSLR, path string) {
+	if path == "" {
+		path, _ = os.Getwd()
+	}
+	status, err := os.Stat(path)
+	if err != nil {
+		panic("The given path does not exists")
+	}
+	if !status.IsDir() {
+		panic("The given path is not a directory")
+	}
+	path_ := filepath.Join(path, "PARSER.json")
+	text := "{\"START\":\"" + parser.StartState() + "\","
+	text += "\"ENDMARKER\": \"" + parser.EndMarker() + "\","
+	text += "\"ACTION\":{"
+	for k1, val := range parser.ActionTable() {
+		text += "\"" + k1 + "\":{"
+		for k2, act := range val {
+			switch act.Action {
+			case SHIFT:
+				text += "\"" + k2 + "\": [\"SHIFT\", \"" + act.NextState + "\"],"
+				break
+			case REDUCE:
+				text += "\"" + k2 + "\": [\"REDUCE\"],"
+				break
+			case ACCEPT:
+				text += "\"" + k2 + "\": [\"ACCEPT\"],"
+				break
+			default:
+				break
+			}
+		}
+		text = text[:len(text)-1]
+		text += "},"
+	}
+	text = text[:len(text)-1]
+	text += "}, \"REDUCE\":{"
+	for k1, val := range parser.ReduceTable() {
+		text += "\"" + k1 + "\":{"
+		for k2, red := range val {
+			symbols := "["
+			for _, s := range red.Symbols {
+				symbols += "\"" + s + "\","
+			}
+			symbols = symbols[:len(symbols)-1] + "]"
+			text += "\"" + k2 + "\":{\"head\": \"" + red.NewSymbol + "\",\"symbols\":" + symbols + "},"
+		}
+		text = text[:len(text)-1]
+		text += "},"
+	}
+	text = text[:len(text)-1]
+	text += "}}"
+	os.WriteFile(path_, []byte(text), 0644)
 }

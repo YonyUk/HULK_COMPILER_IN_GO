@@ -8,15 +8,15 @@ import (
 // Ast binary implementation
 type BinaryAST struct {
 	BaseAST
-	left     IAST
-	right    IAST
-	operator func(left IAST, right IAST) interface{}
+	Left     IAST
+	Right    IAST
+	operator func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{}
 }
 
-func NewBinaryAST(symbol string, line int, column int, operator func(left IAST, right IAST) interface{}) *BinaryAST {
+func NewBinaryAST(symbol string, line int, column int, operator func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{}) *BinaryAST {
 	return &BinaryAST{
-		left:     nil,
-		right:    nil,
+		Left:     nil,
+		Right:    nil,
 		operator: operator,
 		BaseAST: BaseAST{
 			Line:   line,
@@ -39,5 +39,9 @@ func (a *BinaryAST) Symbol() string {
 }
 
 func (a *BinaryAST) Eval(context IContext, collector IErrorCollector) interface{} {
-	return a.operator(a.left, a.right)
+	return a.operator(a.Left, a.Right, context, collector)
+}
+
+func (a *BinaryAST) UpdateSymbol(symbol string) {
+	a.BaseAST.Symbol = symbol
 }

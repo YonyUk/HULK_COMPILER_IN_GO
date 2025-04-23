@@ -11,4 +11,5 @@ type IAST interface {
 	Column() int
 	Eval(context IContext, collector IErrorCollector) interface{}
 	Symbol() string
+	UpdateSymbol(string)
 }

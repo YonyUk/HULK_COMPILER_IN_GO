@@ -37,3 +37,7 @@ func (a *AtomicAST) Eval(context IContext, collector IErrorCollector) interface{
 func (a *AtomicAST) Symbol() string {
 	return a.BaseAST.Symbol
 }
+
+func (a *AtomicAST) UpdateSymbol(symbol string) {
+	a.BaseAST.Symbol = symbol
+}

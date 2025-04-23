@@ -1,11 +1,15 @@
 package hulk
 
 import (
+	. "hulk.com/app/ast"
 	. "hulk.com/app/compiler"
+	. "hulk.com/app/grammar"
 	. "hulk.com/app/hulk/lexical"
+	. "hulk.com/app/hulk/sintax"
 	. "hulk.com/app/interpreter"
 	. "hulk.com/app/lexer"
 	. "hulk.com/app/lexical_analisys"
+	. "hulk.com/app/parser"
 	. "hulk.com/app/tokens"
 )
 
@@ -52,8 +56,29 @@ func NewHulkInterpreter() *HulkInterpreter {
 	lexical.AddRule(NumberToken, num_rule)
 	collector := NewErrorCollector()
 
+	parser := NewParserSLRFromGrammar(ArithMeticGrammar, NewGrammarSymbol("$", Terminal, false), HulkASTBuilder)
+	parser.SetReduction("ArithmeticExpr->ArithmeticExpr+PlusMinusTerm", func(asts []IAST) IAST {
+		plus, _ := asts[1].(*BinaryAST)
+		plus.Left = asts[0]
+		plus.Right = asts[2]
+		plus.UpdateSymbol("ArithmeticExpr")
+		return plus
+	})
+	parser.SetReduction("MulDivTerm->number", func(asts []IAST) IAST {
+		asts[0].UpdateSymbol("MulDivTerm")
+		return asts[0]
+	})
+	parser.SetReduction("PlusMinusTerm->MulDivTerm", func(asts []IAST) IAST {
+		asts[0].UpdateSymbol("PlusMinusTerm")
+		return asts[0]
+	})
+	parser.SetReduction("ArithmeticExpr->PlusMinusTerm", func(asts []IAST) IAST {
+		asts[0].UpdateSymbol("ArithmeticExpr")
+		return asts[0]
+	})
+
 	return &HulkInterpreter{
-		_interpreter: NewInterpreter(lexer, lexical, collector),
+		_interpreter: NewInterpreter(lexer, lexical, parser, collector),
 	}
 }
 
