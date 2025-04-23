@@ -13,7 +13,7 @@ type IParser interface {
 	// Return the ast result from parse the sequence
 	AST() IAST
 	// Sets the reductor method for one production
-	SetReduction(reduction_id string, reductor func(asts []IAST) IAST)
+	SetReduction(reduction_id string, reductor func(asts []IAST, new_symbol string) IAST)
 	// The symbol to mark the end of the stack
 	EndMarker() string
 }

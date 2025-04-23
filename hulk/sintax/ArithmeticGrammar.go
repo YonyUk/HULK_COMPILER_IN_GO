@@ -15,14 +15,16 @@ func init() {
 	Number := NewGrammarSymbol("number", Terminal, false)
 	Plus := NewGrammarSymbol("+", Terminal, false)
 	Minus := NewGrammarSymbol("-", Terminal, false)
+	Mod := NewGrammarSymbol("%", Terminal, false)
 	Mul := NewGrammarSymbol("*", Terminal, false)
 	Div := NewGrammarSymbol("/", Terminal, false)
 
 	ArithMeticGrammar = NewGrammar(ArithmeticExpr)
 
-	// E -> E + T | E - T | T
+	// E -> E + T | E - T | E % T | T
 	ArithMeticGrammar.AddProduction(ArithmeticExpr, []IGrammarSymbol{ArithmeticExpr, Plus, PlusMinusTerm})
 	ArithMeticGrammar.AddProduction(ArithmeticExpr, []IGrammarSymbol{ArithmeticExpr, Minus, PlusMinusTerm})
+	ArithMeticGrammar.AddProduction(ArithmeticExpr, []IGrammarSymbol{ArithmeticExpr, Mod, PlusMinusTerm})
 	ArithMeticGrammar.AddProduction(ArithmeticExpr, []IGrammarSymbol{PlusMinusTerm})
 	// T -> T * F | T / F | F
 	ArithMeticGrammar.AddProduction(PlusMinusTerm, []IGrammarSymbol{PlusMinusTerm, Mul, MulDivTerm})

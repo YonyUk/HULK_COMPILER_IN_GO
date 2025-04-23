@@ -29,7 +29,61 @@ func init() {
 		if a_ok && b_ok {
 			return af + bf
 		}
-		panic("Both values most be numbers")
+		collector.AddError(NewError("The operator + only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
+	}
+	binaryOperatorFunction["-"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
+		a := left.Eval(context, collector)
+		b := right.Eval(context, collector)
+		af, a_ok := a.(float64)
+		bf, b_ok := b.(float64)
+
+		if a_ok && b_ok {
+			return af - bf
+		}
+		collector.AddError(NewError("The operator - only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
+	}
+	binaryOperatorFunction["*"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
+		a := left.Eval(context, collector)
+		b := right.Eval(context, collector)
+		af, a_ok := a.(float64)
+		bf, b_ok := b.(float64)
+
+		if a_ok && b_ok {
+			return af * bf
+		}
+		collector.AddError(NewError("The operator * only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
+	}
+	binaryOperatorFunction["/"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
+		a := left.Eval(context, collector)
+		b := right.Eval(context, collector)
+		af, a_ok := a.(float64)
+		bf, b_ok := b.(float64)
+
+		if a_ok && b_ok {
+			return af / bf
+		}
+		collector.AddError(NewError("The operator / only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
+	}
+	binaryOperatorFunction["%"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
+		a := left.Eval(context, collector)
+		b := right.Eval(context, collector)
+		af, a_ok := a.(float64)
+		bf, b_ok := b.(float64)
+
+		if a_ok && b_ok {
+
+			if float64(int(af)) == af && float64(int(bf)) == bf {
+				return int(af) % int(bf)
+			}
+			collector.AddError(NewError("The operator % only can be applied to integers", left.Line(), left.Column(), Semantic))
+			return nil
+		}
+		collector.AddError(NewError("The operator % only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
 	}
 }
 
@@ -49,12 +103,12 @@ func HulkASTBuilder(token IToken, endmarker string) IAST {
 		if f, ok := binaryOperatorFunction[token.Text()]; ok {
 			return NewBinaryAST(token.Text(), token.Line(), token.Column(), f)
 		}
-		return nil
+		panic("Operator " + token.Text() + " not implemented")
 	case SymbolToken:
 		if token.Text() == endmarker {
 			return NewAtomicAST(endmarker, token.Line(), token.Column(), token.Text())
 		}
-		return nil
+		return NewAtomicAST(token.Text(), token.Line(), token.Column(), token.Text())
 	default:
 		return nil
 	}

@@ -1,7 +1,6 @@
 package hulk
 
 import (
-	. "hulk.com/app/ast"
 	. "hulk.com/app/compiler"
 	. "hulk.com/app/grammar"
 	. "hulk.com/app/hulk/lexical"
@@ -57,25 +56,15 @@ func NewHulkInterpreter() *HulkInterpreter {
 	collector := NewErrorCollector()
 
 	parser := NewParserSLRFromGrammar(ArithMeticGrammar, NewGrammarSymbol("$", Terminal, false), HulkASTBuilder)
-	parser.SetReduction("ArithmeticExpr->ArithmeticExpr+PlusMinusTerm", func(asts []IAST) IAST {
-		plus, _ := asts[1].(*BinaryAST)
-		plus.Left = asts[0]
-		plus.Right = asts[2]
-		plus.UpdateSymbol("ArithmeticExpr")
-		return plus
-	})
-	parser.SetReduction("MulDivTerm->number", func(asts []IAST) IAST {
-		asts[0].UpdateSymbol("MulDivTerm")
-		return asts[0]
-	})
-	parser.SetReduction("PlusMinusTerm->MulDivTerm", func(asts []IAST) IAST {
-		asts[0].UpdateSymbol("PlusMinusTerm")
-		return asts[0]
-	})
-	parser.SetReduction("ArithmeticExpr->PlusMinusTerm", func(asts []IAST) IAST {
-		asts[0].UpdateSymbol("ArithmeticExpr")
-		return asts[0]
-	})
+	parser.SetReduction("ArithmeticExpr->ArithmeticExpr+PlusMinusTerm", BinaryOperatorReductor)
+	parser.SetReduction("ArithmeticExpr->ArithmeticExpr-PlusMinusTerm", BinaryOperatorReductor)
+	parser.SetReduction("ArithmeticExpr->ArithmeticExpr%PlusMinusTerm", BinaryOperatorReductor)
+	parser.SetReduction("PlusMinusTerm->PlusMinusTerm*MulDivTerm", BinaryOperatorReductor)
+	parser.SetReduction("PlusMinusTerm->PlusMinusTerm/MulDivTerm", BinaryOperatorReductor)
+	parser.SetReduction("MulDivTerm->(ArithmeticExpr)", InBettwenExtractorReductor)
+	parser.SetReduction("MulDivTerm->number", AtomicReductor)
+	parser.SetReduction("PlusMinusTerm->MulDivTerm", AtomicReductor)
+	parser.SetReduction("ArithmeticExpr->PlusMinusTerm", AtomicReductor)
 
 	return &HulkInterpreter{
 		_interpreter: NewInterpreter(lexer, lexical, parser, collector),

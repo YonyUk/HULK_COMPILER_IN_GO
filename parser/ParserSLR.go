@@ -19,7 +19,7 @@ type ParserSLR struct {
 	reduce              map[string]map[string]ReduceStruct
 	stack               []IAST
 	ast_engine          func(token IToken, endmarker string) IAST
-	reduction_functions map[string]func(asts []IAST) IAST
+	reduction_functions map[string]func(asts []IAST, new_symbol string) IAST
 	endmarker           string
 	terminals           []string
 }
@@ -118,7 +118,7 @@ func NewParserSLRFromGrammar(g IGrammar, endmarker IGrammarSymbol, ast_engine fu
 		action:              action,
 		reduce:              reduce,
 		ast_engine:          ast_engine,
-		reduction_functions: make(map[string]func(asts []IAST) IAST),
+		reduction_functions: make(map[string]func(asts []IAST, new_symbol string) IAST),
 		endmarker:           endmarker.Symbol(),
 		terminals:           Map(G.Terminals(), func(symbol IGrammarSymbol) string { return symbol.Symbol() }),
 	}
@@ -159,12 +159,16 @@ func (parser *ParserSLR) Parse(token IToken, collector IErrorCollector) {
 				}
 				symbols_to_reduce := parser.stack[len(parser.stack)-len(reduction.Symbols):]
 				parser.stack = parser.stack[:len(parser.stack)-len(reduction.Symbols)]
-				reductor := parser.reduction_functions[reduction_id]
-				new_ast := reductor(symbols_to_reduce)
-				parser.stack = append(parser.stack, new_ast)
-				parser.states_stack = parser.states_stack[:len(parser.states_stack)-len(reduction.Symbols)]
-				action = parser.action[parser.states_stack[len(parser.states_stack)-1].ID()][new_ast.Symbol()]
-				parser.states_stack = append(parser.states_stack, parser.states_stack[len(parser.states_stack)-1].Next(new_ast.Symbol()))
+				if reductor, ok := parser.reduction_functions[reduction_id]; ok {
+					new_ast := reductor(symbols_to_reduce, reduction.NewSymbol)
+					parser.stack = append(parser.stack, new_ast)
+					parser.states_stack = parser.states_stack[:len(parser.states_stack)-len(reduction.Symbols)]
+					action = parser.action[parser.states_stack[len(parser.states_stack)-1].ID()][new_ast.Symbol()]
+					parser.states_stack = append(parser.states_stack, parser.states_stack[len(parser.states_stack)-1].Next(new_ast.Symbol()))
+				} else {
+					panic("There is not a reduction defined for " + reduction_id)
+				}
+
 			}
 		}
 	}
@@ -182,7 +186,7 @@ func (parser *ParserSLR) StartState() string {
 	return parser.start_state.ID()
 }
 
-func (parser *ParserSLR) SetReduction(reduction_id string, reductor func(asts []IAST) IAST) {
+func (parser *ParserSLR) SetReduction(reduction_id string, reductor func(asts []IAST, new_symbol string) IAST) {
 	parser.reduction_functions[reduction_id] = reductor
 }
 
