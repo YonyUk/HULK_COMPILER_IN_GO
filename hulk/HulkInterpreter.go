@@ -56,15 +56,23 @@ func NewHulkInterpreter() *HulkInterpreter {
 	collector := NewErrorCollector()
 
 	parser := NewParserSLRFromGrammar(ArithMeticGrammar, NewGrammarSymbol("$", Terminal, false), HulkASTBuilder)
+
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr+PlusMinusTerm", BinaryOperatorReductor)
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr-PlusMinusTerm", BinaryOperatorReductor)
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr%PlusMinusTerm", BinaryOperatorReductor)
+	parser.SetReduction("ArithmeticExpr->PlusMinusTerm", AtomicReductor)
+
 	parser.SetReduction("PlusMinusTerm->PlusMinusTerm*MulDivTerm", BinaryOperatorReductor)
 	parser.SetReduction("PlusMinusTerm->PlusMinusTerm/MulDivTerm", BinaryOperatorReductor)
-	parser.SetReduction("MulDivTerm->(ArithmeticExpr)", InBettwenExtractorReductor)
-	parser.SetReduction("MulDivTerm->number", AtomicReductor)
 	parser.SetReduction("PlusMinusTerm->MulDivTerm", AtomicReductor)
-	parser.SetReduction("ArithmeticExpr->PlusMinusTerm", AtomicReductor)
+
+	parser.SetReduction("MulDivTerm->MulDivTerm^ExpTerm", BinaryOperatorReductor)
+	parser.SetReduction("MulDivTerm->ExpTerm", AtomicReductor)
+
+	parser.SetReduction("ExpTerm->(ArithmeticExpr)", InBettwenExtractorReductor)
+	parser.SetReduction("ExpTerm->number", AtomicReductor)
+
+	DumpParser(*parser, "")
 
 	return &HulkInterpreter{
 		_interpreter: NewInterpreter(lexer, lexical, parser, collector),

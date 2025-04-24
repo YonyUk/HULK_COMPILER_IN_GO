@@ -1,6 +1,9 @@
 package sintax
 
 import (
+	"errors"
+	"math"
+	"reflect"
 	"strconv"
 
 	. "hulk.com/app/ast"
@@ -23,11 +26,10 @@ func init() {
 	binaryOperatorFunction["+"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
 		a := left.Eval(context, collector)
 		b := right.Eval(context, collector)
-		af, a_ok := a.(float64)
-		bf, b_ok := b.(float64)
-
-		if a_ok && b_ok {
-			return af + bf
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			return a_value + b_value
 		}
 		collector.AddError(NewError("The operator + only can be applied to numbers", left.Line(), left.Column(), Gramatical))
 		return nil
@@ -35,54 +37,59 @@ func init() {
 	binaryOperatorFunction["-"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
 		a := left.Eval(context, collector)
 		b := right.Eval(context, collector)
-		af, a_ok := a.(float64)
-		bf, b_ok := b.(float64)
-
-		if a_ok && b_ok {
-			return af - bf
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			return a_value - b_value
 		}
-		collector.AddError(NewError("The operator - only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		collector.AddError(NewError("The operator + only can be applied to numbers", left.Line(), left.Column(), Gramatical))
 		return nil
 	}
 	binaryOperatorFunction["*"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
 		a := left.Eval(context, collector)
 		b := right.Eval(context, collector)
-		af, a_ok := a.(float64)
-		bf, b_ok := b.(float64)
-
-		if a_ok && b_ok {
-			return af * bf
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			return a_value * b_value
 		}
-		collector.AddError(NewError("The operator * only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		collector.AddError(NewError("The operator + only can be applied to numbers", left.Line(), left.Column(), Gramatical))
 		return nil
 	}
 	binaryOperatorFunction["/"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
 		a := left.Eval(context, collector)
 		b := right.Eval(context, collector)
-		af, a_ok := a.(float64)
-		bf, b_ok := b.(float64)
-
-		if a_ok && b_ok {
-			return af / bf
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			return a_value / b_value
 		}
-		collector.AddError(NewError("The operator / only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		collector.AddError(NewError("The operator + only can be applied to numbers", left.Line(), left.Column(), Gramatical))
 		return nil
 	}
 	binaryOperatorFunction["%"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
 		a := left.Eval(context, collector)
 		b := right.Eval(context, collector)
-		af, a_ok := a.(float64)
-		bf, b_ok := b.(float64)
-
-		if a_ok && b_ok {
-
-			if float64(int(af)) == af && float64(int(bf)) == bf {
-				return int(af) % int(bf)
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			if int(a_value) == int(a_value) && int(b_value) == int(b_value) {
+				return int(a_value) % int(b_value)
 			}
 			collector.AddError(NewError("The operator % only can be applied to integers", left.Line(), left.Column(), Semantic))
-			return nil
 		}
 		collector.AddError(NewError("The operator % only can be applied to numbers", left.Line(), left.Column(), Gramatical))
+		return nil
+	}
+	binaryOperatorFunction["^"] = func(left IAST, right IAST, context IContext, collector IErrorCollector) interface{} {
+		a := left.Eval(context, collector)
+		b := right.Eval(context, collector)
+		a_value, a_err := isNumber(a)
+		b_value, b_err := isNumber(b)
+		if a_err == nil && b_err == nil {
+			return math.Pow(a_value, b_value)
+		}
+		collector.AddError(NewError("The operator ^ only can be applied to numbers", left.Line(), left.Column(), Gramatical))
 		return nil
 	}
 }
@@ -111,5 +118,19 @@ func HulkASTBuilder(token IToken, endmarker string) IAST {
 		return NewAtomicAST(token.Text(), token.Line(), token.Column(), token.Text())
 	default:
 		return nil
+	}
+}
+
+func isNumber(value interface{}) (float64, error) {
+	type_ := reflect.TypeOf(value).Kind()
+	switch type_ {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return float64(value.(int)), nil
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+		return float64(value.(uint)), nil
+	case reflect.Float32, reflect.Float64:
+		return value.(float64), nil
+	default:
+		return 0, errors.New("The value is not a number")
 	}
 }

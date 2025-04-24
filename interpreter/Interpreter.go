@@ -43,14 +43,12 @@ func (interpreter *Interpreter) Execute(code string) {
 	}
 	EOF := NewToken(interpreter.lexer.Current().Line(), interpreter.lexer.Current().Column()+len(interpreter.lexer.Current().Text()), interpreter.parser.EndMarker(), SymbolToken)
 	interpreter.parser.Parse(EOF, interpreter.error_collector)
+	code_result := interpreter.parser.AST().Eval(nil, interpreter.error_collector)
 	if len(interpreter.error_collector.Errors()) == 0 {
-		code_result := interpreter.parser.AST().Eval(nil, interpreter.error_collector)
-		if len(interpreter.error_collector.Errors()) == 0 {
-			fmt.Println(code_result)
-		} else {
-			for _, e := range interpreter.error_collector.Errors() {
-				fmt.Println(interpreter.error_type_texts[e.Type()], "Error at line", e.Line(), "column", e.Column(), ": ", e.Message())
-			}
+		fmt.Println(code_result)
+	} else {
+		for _, e := range interpreter.error_collector.Errors() {
+			fmt.Println(interpreter.error_type_texts[e.Type()], "Error at line", e.Line(), "column", e.Column(), ": ", e.Message())
 		}
 	}
 }
