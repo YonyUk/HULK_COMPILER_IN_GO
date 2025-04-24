@@ -16,6 +16,9 @@ func NewLexicalAnalizer() *LexicalAnalizer {
 }
 
 func (lexical *LexicalAnalizer) Check(token IToken) IError {
+	if token.Type() == GarbageToken {
+		return NewError("Undefined token "+token.Text(), token.Line(), token.Column(), Lexical)
+	}
 	if rules, ok := lexical.rules[token.Type()]; ok {
 		for _, rule := range rules {
 			if !rule.Rule()(token) {

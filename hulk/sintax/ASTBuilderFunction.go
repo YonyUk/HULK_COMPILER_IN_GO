@@ -117,7 +117,7 @@ func HulkASTBuilder(token IToken, endmarker string) IAST {
 		}
 		return NewAtomicAST(token.Text(), token.Line(), token.Column(), token.Text())
 	default:
-		return nil
+		return NewAtomicAST(token.Text(), token.Line(), token.Column(), token.Text())
 	}
 }
 

@@ -63,7 +63,9 @@ func (l *Lexer) Next() bool {
 			automaton.Walk(rune(l.code[l.text_pointer]))
 			if !automaton.CurrentState().IsFault() {
 				walked = true
-				current_types = append(current_types, token_type)
+				if automaton.CurrentState().IsAccepting() {
+					current_types = append(current_types, token_type)
+				}
 			}
 		}
 		if walked {
@@ -85,6 +87,9 @@ func (l *Lexer) Next() bool {
 					l.line++
 				} else {
 					l.column++
+				}
+				if l.code[l.text_pointer] != ' ' {
+					l.text_readed += string(l.code[l.text_pointer])
 				}
 				l.code = l.code[1:]
 				walked = true
