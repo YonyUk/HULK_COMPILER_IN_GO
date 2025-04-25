@@ -55,8 +55,13 @@ func NewHulkInterpreter() *HulkInterpreter {
 	lexical.AddRule(NumberToken, num_rule)
 	collector := NewErrorCollector()
 
-	parser := NewParserSLRFromGrammar(ArithMeticGrammar, NewGrammarSymbol("$", Terminal, false), HulkASTBuilder)
+	parser := NewParserSLRFromGrammar(HulkProgramGrammar, NewGrammarSymbol("$", Terminal, false), HulkASTBuilder)
 
+	// General reductions
+	parser.SetReduction("HulkProgram->ArithmeticExpr", AtomicReductor)
+	parser.SetReduction("HulkProgram->BooleanExpr", AtomicReductor)
+
+	// Arithmetic reductions
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr+PlusMinusTerm", BinaryOperatorReductor)
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr-PlusMinusTerm", BinaryOperatorReductor)
 	parser.SetReduction("ArithmeticExpr->ArithmeticExpr%PlusMinusTerm", BinaryOperatorReductor)
@@ -72,7 +77,15 @@ func NewHulkInterpreter() *HulkInterpreter {
 	parser.SetReduction("ExpTerm->(ArithmeticExpr)", InBettwenExtractorReductor)
 	parser.SetReduction("ExpTerm->number", AtomicReductor)
 
-	DumpParser(*parser, "")
+	// Boolean reductions
+	parser.SetReduction("BooleanExpr->BooleanExpr&BooleanExpr", BinaryOperatorReductor)
+	parser.SetReduction("BooleanExpr->BooleanExpr|BooleanExpr", BinaryOperatorReductor)
+	parser.SetReduction("BooleanExpr->Boolean", AtomicReductor)
+	parser.SetReduction("BooleanExpr->(BooleanExpr)", InBettwenExtractorReductor)
+	parser.SetReduction("BooleanExpr->!Boolean", InFrontOperatorReductor)
+	parser.SetReduction("Boolean->boolean", AtomicReductor)
+
+	// DumpParser(*parser, "")
 
 	return &HulkInterpreter{
 		_interpreter: NewInterpreter(lexer, lexical, parser, collector),

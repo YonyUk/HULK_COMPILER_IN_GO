@@ -5,8 +5,10 @@ import (
 )
 
 var ArithMeticGrammar IGrammar
+var HulkProgramGrammar IGrammar
 
 func init() {
+	// Arithmetic grammar
 	ArithmeticExpr := NewGrammarSymbol("ArithmeticExpr", NonTerminal, false)
 	PlusMinusTerm := NewGrammarSymbol("PlusMinusTerm", NonTerminal, false)
 	MulDivTerm := NewGrammarSymbol("MulDivTerm", NonTerminal, false)
@@ -38,4 +40,22 @@ func init() {
 	// Q -> ( E ) | number
 	ArithMeticGrammar.AddProduction(ExpTerm, []IGrammarSymbol{LP, ArithmeticExpr, RP})
 	ArithMeticGrammar.AddProduction(ExpTerm, []IGrammarSymbol{Number})
+
+	// BooleanGrammar
+	BooleanExpr := NewGrammarSymbol("BooleanExpr", NonTerminal, false)
+	Boolean := NewGrammarSymbol("Boolean", NonTerminal, false)
+	And := NewGrammarSymbol("&", Terminal, false)
+	Or := NewGrammarSymbol("|", Terminal, false)
+	Not := NewGrammarSymbol("!", Terminal, false)
+	boolean := NewGrammarSymbol("boolean", Terminal, false)
+
+	BooleanGrammar := NewGrammar(BooleanExpr)
+	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{BooleanExpr, And, BooleanExpr})
+	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{Not, Boolean})
+	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{BooleanExpr, Or, BooleanExpr})
+	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{LP, BooleanExpr, RP})
+	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{Boolean})
+	BooleanGrammar.AddProduction(Boolean, []IGrammarSymbol{boolean})
+
+	HulkProgramGrammar = GrammarUnion([]IGrammar{ArithMeticGrammar, BooleanGrammar}, "HulkProgram")
 }

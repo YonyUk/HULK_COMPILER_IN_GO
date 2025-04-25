@@ -8,7 +8,7 @@ var OperatorGrammar IGrammar
 
 func init() {
 	operators := []string{
-		"+",
+		"+", //Arithmetic operators
 		"-",
 		"*",
 		"/",
@@ -17,6 +17,9 @@ func init() {
 		"as",
 		"@",
 		"@@",
+		"&", // boolean operators
+		"|",
+		"!",
 	}
 	OperatorGrammar = GetWordsGrammar(operators)
 }

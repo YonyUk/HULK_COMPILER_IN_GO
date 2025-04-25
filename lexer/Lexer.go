@@ -82,14 +82,14 @@ func (l *Lexer) Next() bool {
 		}
 		if !walked {
 			if l.text_pointer == 0 {
+				if l.code[l.text_pointer] != ' ' && l.code[l.text_pointer] != '\n' {
+					l.current_token = l.token_extractor.GetToken(last_types, l.line, l.column, string(l.code[0]))
+				}
 				if l.code[l.text_pointer] == '\n' {
 					l.column = 1
 					l.line++
 				} else {
 					l.column++
-				}
-				if l.code[l.text_pointer] != ' ' {
-					l.text_readed += string(l.code[l.text_pointer])
 				}
 				l.code = l.code[1:]
 				walked = true

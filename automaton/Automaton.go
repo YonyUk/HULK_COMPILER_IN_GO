@@ -123,6 +123,9 @@ func (a *Automaton[T]) CurrentState() IState[T] {
 }
 
 func (a *Automaton[T]) Walk(symbol T) error {
+	if a.current.IsFault() {
+		return nil
+	}
 	if !a.IsDeterministic() {
 		return errors.New("Automaton is not deterministic, make it deterministic first")
 	}

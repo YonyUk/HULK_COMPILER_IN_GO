@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"strconv"
 
 	. "hulk.com/app/ast"
@@ -140,11 +141,13 @@ func (parser *ParserSLR) Parse(token IToken, collector IErrorCollector) {
 		if ast.Symbol() == parser.endmarker {
 			collector.AddError(NewError("Unexpected EOF symbol "+","+msg, ast.Line(), ast.Column(), Gramatical))
 		} else {
+			fmt.Println(token)
 			collector.AddError(NewError("Unexpected symbol "+ast.Symbol()+","+msg, ast.Line(), ast.Column(), Gramatical))
 		}
 	} else {
 		symbol_accepted := false
 		for !symbol_accepted {
+			fmt.Println(Map(parser.stack, func(a IAST) string { return a.Symbol() }))
 			action := parser.action[parser.states_stack[len(parser.states_stack)-1].ID()][ast.Symbol()]
 			if action.Action == SHIFT || action.Action == ACCEPT {
 				parser.states_stack = append(parser.states_stack, parser.states_stack[len(parser.states_stack)-1].Next(ast.Symbol()))

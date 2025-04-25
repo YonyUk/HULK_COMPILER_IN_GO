@@ -1,1 +1,1502 @@
-{"START":"I0","ENDMARKER": "$","ACTION":{"I0":{"MulDivTerm": ["SHIFT", "I3"],"ExpTerm": ["SHIFT", "I4"],"(": ["SHIFT", "I5"],"number": ["SHIFT", "I6"],"ArithmeticExpr": ["SHIFT", "I1"],"PlusMinusTerm": ["SHIFT", "I2"]},"I7":{"number": ["SHIFT", "I6"],"PlusMinusTerm": ["SHIFT", "I14"],"MulDivTerm": ["SHIFT", "I3"],"ExpTerm": ["SHIFT", "I4"],"(": ["SHIFT", "I5"]},"I11":{"(": ["SHIFT", "I5"],"number": ["SHIFT", "I6"],"MulDivTerm": ["SHIFT", "I18"],"ExpTerm": ["SHIFT", "I4"]},"I12":{"number": ["SHIFT", "I6"],"ExpTerm": ["SHIFT", "I19"],"(": ["SHIFT", "I5"]},"I18":{"*": ["REDUCE"],"/": ["REDUCE"],"^": ["SHIFT", "I12"],"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"]},"I3":{"%": ["REDUCE"],")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["SHIFT", "I12"],"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"]},"I4":{"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["REDUCE"],"$": ["REDUCE"]},"I5":{"number": ["SHIFT", "I6"],"ArithmeticExpr": ["SHIFT", "I13"],"PlusMinusTerm": ["SHIFT", "I2"],"MulDivTerm": ["SHIFT", "I3"],"ExpTerm": ["SHIFT", "I4"],"(": ["SHIFT", "I5"]},"I9":{"(": ["SHIFT", "I5"],"number": ["SHIFT", "I6"],"PlusMinusTerm": ["SHIFT", "I16"],"MulDivTerm": ["SHIFT", "I3"],"ExpTerm": ["SHIFT", "I4"]},"I19":{")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["REDUCE"],"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"]},"I2":{"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["SHIFT", "I10"],"/": ["SHIFT", "I11"]},"I6":{"%": ["REDUCE"],")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["REDUCE"],"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"]},"I8":{"ExpTerm": ["SHIFT", "I4"],"(": ["SHIFT", "I5"],"number": ["SHIFT", "I6"],"PlusMinusTerm": ["SHIFT", "I15"],"MulDivTerm": ["SHIFT", "I3"]},"I10":{"(": ["SHIFT", "I5"],"number": ["SHIFT", "I6"],"MulDivTerm": ["SHIFT", "I17"],"ExpTerm": ["SHIFT", "I4"]},"I14":{"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["SHIFT", "I10"],"/": ["SHIFT", "I11"],"$": ["REDUCE"],"+": ["REDUCE"]},"I16":{"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["SHIFT", "I10"],"/": ["SHIFT", "I11"]},"I17":{"%": ["REDUCE"],")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["SHIFT", "I12"],"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"]},"I1":{"$": ["ACCEPT"],"+": ["SHIFT", "I7"],"-": ["SHIFT", "I8"],"%": ["SHIFT", "I9"]},"I13":{"+": ["SHIFT", "I7"],"-": ["SHIFT", "I8"],"%": ["SHIFT", "I9"],")": ["SHIFT", "I20"]},"I15":{"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["SHIFT", "I10"],"/": ["SHIFT", "I11"],"$": ["REDUCE"],"+": ["REDUCE"]},"I20":{"$": ["REDUCE"],"+": ["REDUCE"],"-": ["REDUCE"],"%": ["REDUCE"],")": ["REDUCE"],"*": ["REDUCE"],"/": ["REDUCE"],"^": ["REDUCE"]}}, "REDUCE":{"I2":{"-":{"head": "ArithmeticExpr","symbols":["PlusMinusTerm"]},"%":{"head": "ArithmeticExpr","symbols":["PlusMinusTerm"]},")":{"head": "ArithmeticExpr","symbols":["PlusMinusTerm"]},"$":{"head": "ArithmeticExpr","symbols":["PlusMinusTerm"]},"+":{"head": "ArithmeticExpr","symbols":["PlusMinusTerm"]}},"I3":{"/":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},"$":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},"+":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},"-":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},"%":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},")":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]},"*":{"head": "PlusMinusTerm","symbols":["MulDivTerm"]}},"I4":{"/":{"head": "MulDivTerm","symbols":["ExpTerm"]},"^":{"head": "MulDivTerm","symbols":["ExpTerm"]},"$":{"head": "MulDivTerm","symbols":["ExpTerm"]},"+":{"head": "MulDivTerm","symbols":["ExpTerm"]},"-":{"head": "MulDivTerm","symbols":["ExpTerm"]},"%":{"head": "MulDivTerm","symbols":["ExpTerm"]},")":{"head": "MulDivTerm","symbols":["ExpTerm"]},"*":{"head": "MulDivTerm","symbols":["ExpTerm"]}},"I14":{"$":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","+","PlusMinusTerm"]},"+":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","+","PlusMinusTerm"]},"-":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","+","PlusMinusTerm"]},"%":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","+","PlusMinusTerm"]},")":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","+","PlusMinusTerm"]}},"I15":{"+":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","-","PlusMinusTerm"]},"-":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","-","PlusMinusTerm"]},"%":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","-","PlusMinusTerm"]},")":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","-","PlusMinusTerm"]},"$":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","-","PlusMinusTerm"]}},"I18":{"$":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},"+":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},"-":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},"%":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},")":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},"*":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]},"/":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","/","MulDivTerm"]}},"I20":{"%":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},")":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"*":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"/":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"^":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"$":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"+":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]},"-":{"head": "ExpTerm","symbols":["(","ArithmeticExpr",")"]}},"I6":{"^":{"head": "ExpTerm","symbols":["number"]},"$":{"head": "ExpTerm","symbols":["number"]},"+":{"head": "ExpTerm","symbols":["number"]},"-":{"head": "ExpTerm","symbols":["number"]},"%":{"head": "ExpTerm","symbols":["number"]},")":{"head": "ExpTerm","symbols":["number"]},"*":{"head": "ExpTerm","symbols":["number"]},"/":{"head": "ExpTerm","symbols":["number"]}},"I16":{"$":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","%","PlusMinusTerm"]},"+":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","%","PlusMinusTerm"]},"-":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","%","PlusMinusTerm"]},"%":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","%","PlusMinusTerm"]},")":{"head": "ArithmeticExpr","symbols":["ArithmeticExpr","%","PlusMinusTerm"]}},"I17":{"+":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},"-":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},"%":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},")":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},"*":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},"/":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]},"$":{"head": "PlusMinusTerm","symbols":["PlusMinusTerm","*","MulDivTerm"]}},"I19":{"^":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"$":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"+":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"-":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"%":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},")":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"*":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]},"/":{"head": "MulDivTerm","symbols":["MulDivTerm","^","ExpTerm"]}}}}
+{
+    "START": "I0",
+    "ENDMARKER": "$",
+    "ACTION": {
+        "I1": {
+            "$": [
+                "ACCEPT"
+            ]
+        },
+        "I3": {
+            "&": [
+                "SHIFT",
+                "I15"
+            ],
+            "|": [
+                "SHIFT",
+                "I16"
+            ],
+            "$": [
+                "REDUCE"
+            ]
+        },
+        "I11": {
+            "$": [
+                "REDUCE"
+            ],
+            "&": [
+                "REDUCE"
+            ],
+            "|": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I14": {
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I26"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ]
+        },
+        "I2": {
+            "+": [
+                "SHIFT",
+                "I12"
+            ],
+            "-": [
+                "SHIFT",
+                "I13"
+            ],
+            "%": [
+                "SHIFT",
+                "I14"
+            ],
+            "$": [
+                "REDUCE"
+            ]
+        },
+        "I5": {
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ],
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "SHIFT",
+                "I19"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ]
+        },
+        "I10": {
+            "Boolean": [
+                "SHIFT",
+                "I22"
+            ],
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ]
+        },
+        "I19": {
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I32"
+            ]
+        },
+        "I23": {
+            "*": [
+                "SHIFT",
+                "I17"
+            ],
+            "/": [
+                "SHIFT",
+                "I18"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I25": {
+            "*": [
+                "SHIFT",
+                "I17"
+            ],
+            "/": [
+                "SHIFT",
+                "I18"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I30": {
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ],
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "SHIFT",
+                "I19"
+            ],
+            "$": [
+                "REDUCE"
+            ]
+        },
+        "I32": {
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ],
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ]
+        },
+        "I12": {
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I23"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ]
+        },
+        "I17": {
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I30"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ]
+        },
+        "I24": {
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "ArithmeticExpr": [
+                "SHIFT",
+                "I20"
+            ],
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I4"
+            ]
+        },
+        "I31": {
+            "^": [
+                "SHIFT",
+                "I19"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ],
+            "/": [
+                "REDUCE"
+            ]
+        },
+        "I0": {
+            "ArithmeticExpr": [
+                "SHIFT",
+                "I2"
+            ],
+            "BooleanExpr": [
+                "SHIFT",
+                "I3"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "Boolean": [
+                "SHIFT",
+                "I7"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "HulkProgram": [
+                "SHIFT",
+                "I1"
+            ],
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I4"
+            ],
+            "(": [
+                "SHIFT",
+                "I8"
+            ],
+            "!": [
+                "SHIFT",
+                "I10"
+            ],
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ]
+        },
+        "I8": {
+            "!": [
+                "SHIFT",
+                "I10"
+            ],
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "(": [
+                "SHIFT",
+                "I8"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "ArithmeticExpr": [
+                "SHIFT",
+                "I20"
+            ],
+            "BooleanExpr": [
+                "SHIFT",
+                "I21"
+            ],
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I4"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "Boolean": [
+                "SHIFT",
+                "I7"
+            ]
+        },
+        "I16": {
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ],
+            "BooleanExpr": [
+                "SHIFT",
+                "I29"
+            ],
+            "Boolean": [
+                "SHIFT",
+                "I7"
+            ],
+            "(": [
+                "SHIFT",
+                "I28"
+            ],
+            "!": [
+                "SHIFT",
+                "I10"
+            ]
+        },
+        "I27": {
+            "|": [
+                "SHIFT",
+                "I16"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "&": [
+                "SHIFT",
+                "I15"
+            ]
+        },
+        "I28": {
+            "(": [
+                "SHIFT",
+                "I28"
+            ],
+            "!": [
+                "SHIFT",
+                "I10"
+            ],
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ],
+            "BooleanExpr": [
+                "SHIFT",
+                "I21"
+            ],
+            "Boolean": [
+                "SHIFT",
+                "I7"
+            ]
+        },
+        "I13": {
+            "MulDivTerm": [
+                "SHIFT",
+                "I5"
+            ],
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "PlusMinusTerm": [
+                "SHIFT",
+                "I25"
+            ]
+        },
+        "I15": {
+            "(": [
+                "SHIFT",
+                "I28"
+            ],
+            "!": [
+                "SHIFT",
+                "I10"
+            ],
+            "boolean": [
+                "SHIFT",
+                "I11"
+            ],
+            "BooleanExpr": [
+                "SHIFT",
+                "I27"
+            ],
+            "Boolean": [
+                "SHIFT",
+                "I7"
+            ]
+        },
+        "I7": {
+            "$": [
+                "REDUCE"
+            ],
+            "&": [
+                "REDUCE"
+            ],
+            "|": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I20": {
+            "%": [
+                "SHIFT",
+                "I14"
+            ],
+            ")": [
+                "SHIFT",
+                "I33"
+            ],
+            "+": [
+                "SHIFT",
+                "I12"
+            ],
+            "-": [
+                "SHIFT",
+                "I13"
+            ]
+        },
+        "I33": {
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ]
+        },
+        "I34": {
+            "$": [
+                "REDUCE"
+            ],
+            "&": [
+                "REDUCE"
+            ],
+            "|": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I6": {
+            "*": [
+                "REDUCE"
+            ],
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I9": {
+            "/": [
+                "REDUCE"
+            ],
+            "^": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "REDUCE"
+            ]
+        },
+        "I29": {
+            "&": [
+                "REDUCE"
+            ],
+            "|": [
+                "REDUCE"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I4": {
+            "/": [
+                "SHIFT",
+                "I18"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ],
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "SHIFT",
+                "I17"
+            ]
+        },
+        "I18": {
+            "ExpTerm": [
+                "SHIFT",
+                "I6"
+            ],
+            "(": [
+                "SHIFT",
+                "I24"
+            ],
+            "number": [
+                "SHIFT",
+                "I9"
+            ],
+            "MulDivTerm": [
+                "SHIFT",
+                "I31"
+            ]
+        },
+        "I21": {
+            ")": [
+                "SHIFT",
+                "I34"
+            ],
+            "&": [
+                "SHIFT",
+                "I15"
+            ],
+            "|": [
+                "SHIFT",
+                "I16"
+            ]
+        },
+        "I22": {
+            "$": [
+                "REDUCE"
+            ],
+            "&": [
+                "REDUCE"
+            ],
+            "|": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ]
+        },
+        "I26": {
+            "-": [
+                "REDUCE"
+            ],
+            "%": [
+                "REDUCE"
+            ],
+            ")": [
+                "REDUCE"
+            ],
+            "*": [
+                "SHIFT",
+                "I17"
+            ],
+            "/": [
+                "SHIFT",
+                "I18"
+            ],
+            "$": [
+                "REDUCE"
+            ],
+            "+": [
+                "REDUCE"
+            ]
+        }
+    },
+    "REDUCE": {
+        "I34": {
+            "|": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "(",
+                    "BooleanExpr",
+                    ")"
+                ]
+            },
+            ")": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "(",
+                    "BooleanExpr",
+                    ")"
+                ]
+            },
+            "$": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "(",
+                    "BooleanExpr",
+                    ")"
+                ]
+            },
+            "&": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "(",
+                    "BooleanExpr",
+                    ")"
+                ]
+            }
+        },
+        "I3": {
+            "$": {
+                "head": "HulkProgram",
+                "symbols": [
+                    "BooleanExpr"
+                ]
+            }
+        },
+        "I5": {
+            "/": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            "$": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            "+": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            "-": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            "%": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            ")": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            },
+            "*": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "MulDivTerm"
+                ]
+            }
+        },
+        "I23": {
+            "$": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "+",
+                    "PlusMinusTerm"
+                ]
+            },
+            "+": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "+",
+                    "PlusMinusTerm"
+                ]
+            },
+            "-": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "+",
+                    "PlusMinusTerm"
+                ]
+            },
+            "%": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "+",
+                    "PlusMinusTerm"
+                ]
+            },
+            ")": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "+",
+                    "PlusMinusTerm"
+                ]
+            }
+        },
+        "I27": {
+            "$": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "&",
+                    "BooleanExpr"
+                ]
+            },
+            "&": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "&",
+                    "BooleanExpr"
+                ]
+            },
+            "|": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "&",
+                    "BooleanExpr"
+                ]
+            },
+            ")": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "&",
+                    "BooleanExpr"
+                ]
+            }
+        },
+        "I33": {
+            "^": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "$": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "+": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "-": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "%": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            ")": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "*": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            },
+            "/": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "(",
+                    "ArithmeticExpr",
+                    ")"
+                ]
+            }
+        },
+        "I2": {
+            "$": {
+                "head": "HulkProgram",
+                "symbols": [
+                    "ArithmeticExpr"
+                ]
+            }
+        },
+        "I9": {
+            "-": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "%": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            ")": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "*": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "/": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "^": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "$": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            },
+            "+": {
+                "head": "ExpTerm",
+                "symbols": [
+                    "number"
+                ]
+            }
+        },
+        "I32": {
+            "-": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "%": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            ")": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "*": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "/": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "^": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "$": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            },
+            "+": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "MulDivTerm",
+                    "^",
+                    "ExpTerm"
+                ]
+            }
+        },
+        "I26": {
+            ")": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "%",
+                    "PlusMinusTerm"
+                ]
+            },
+            "$": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "%",
+                    "PlusMinusTerm"
+                ]
+            },
+            "+": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "%",
+                    "PlusMinusTerm"
+                ]
+            },
+            "-": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "%",
+                    "PlusMinusTerm"
+                ]
+            },
+            "%": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "%",
+                    "PlusMinusTerm"
+                ]
+            }
+        },
+        "I29": {
+            "$": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "|",
+                    "BooleanExpr"
+                ]
+            },
+            "&": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "|",
+                    "BooleanExpr"
+                ]
+            },
+            "|": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "|",
+                    "BooleanExpr"
+                ]
+            },
+            ")": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "BooleanExpr",
+                    "|",
+                    "BooleanExpr"
+                ]
+            }
+        },
+        "I30": {
+            "/": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            "$": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            "+": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            "-": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            "%": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            ")": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            },
+            "*": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "*",
+                    "MulDivTerm"
+                ]
+            }
+        },
+        "I31": {
+            ")": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "*": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "/": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "$": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "+": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "-": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            },
+            "%": {
+                "head": "PlusMinusTerm",
+                "symbols": [
+                    "PlusMinusTerm",
+                    "/",
+                    "MulDivTerm"
+                ]
+            }
+        },
+        "I4": {
+            "$": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "PlusMinusTerm"
+                ]
+            },
+            "+": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "PlusMinusTerm"
+                ]
+            },
+            "-": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "PlusMinusTerm"
+                ]
+            },
+            "%": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "PlusMinusTerm"
+                ]
+            },
+            ")": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "PlusMinusTerm"
+                ]
+            }
+        },
+        "I6": {
+            "-": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "%": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            ")": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "*": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "/": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "^": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "$": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            },
+            "+": {
+                "head": "MulDivTerm",
+                "symbols": [
+                    "ExpTerm"
+                ]
+            }
+        },
+        "I7": {
+            "&": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "Boolean"
+                ]
+            },
+            "|": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "Boolean"
+                ]
+            },
+            ")": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "Boolean"
+                ]
+            },
+            "$": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "Boolean"
+                ]
+            }
+        },
+        "I11": {
+            ")": {
+                "head": "Boolean",
+                "symbols": [
+                    "boolean"
+                ]
+            },
+            "$": {
+                "head": "Boolean",
+                "symbols": [
+                    "boolean"
+                ]
+            },
+            "&": {
+                "head": "Boolean",
+                "symbols": [
+                    "boolean"
+                ]
+            },
+            "|": {
+                "head": "Boolean",
+                "symbols": [
+                    "boolean"
+                ]
+            }
+        },
+        "I22": {
+            "$": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "!",
+                    "Boolean"
+                ]
+            },
+            "&": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "!",
+                    "Boolean"
+                ]
+            },
+            "|": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "!",
+                    "Boolean"
+                ]
+            },
+            ")": {
+                "head": "BooleanExpr",
+                "symbols": [
+                    "!",
+                    "Boolean"
+                ]
+            }
+        },
+        "I25": {
+            "$": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "-",
+                    "PlusMinusTerm"
+                ]
+            },
+            "+": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "-",
+                    "PlusMinusTerm"
+                ]
+            },
+            "-": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "-",
+                    "PlusMinusTerm"
+                ]
+            },
+            "%": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "-",
+                    "PlusMinusTerm"
+                ]
+            },
+            ")": {
+                "head": "ArithmeticExpr",
+                "symbols": [
+                    "ArithmeticExpr",
+                    "-",
+                    "PlusMinusTerm"
+                ]
+            }
+        }
+    }
+}

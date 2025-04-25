@@ -1,10 +1,9 @@
 package grammar
 
-func GrammarUnion(grammars []IGrammar) IGrammar {
+func GrammarUnion(grammars []IGrammar, start_symbol_id string) IGrammar {
 	if len(grammars) < 2 {
 		panic("grammars most have at least two elements")
 	}
-	start_symbol_id := grammars[0].StartSymbol().Symbol()
 	start_symbol := NewGrammarSymbol(start_symbol_id, NonTerminal, false)
 	g_result := NewGrammar(start_symbol)
 	for _, g := range grammars {
