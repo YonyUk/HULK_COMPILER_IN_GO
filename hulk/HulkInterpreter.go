@@ -81,8 +81,8 @@ func NewHulkInterpreter() *HulkInterpreter {
 	parser.SetReduction("BooleanExpr->BooleanExpr&BooleanExpr", BinaryOperatorReductor)
 	parser.SetReduction("BooleanExpr->BooleanExpr|BooleanExpr", BinaryOperatorReductor)
 	parser.SetReduction("BooleanExpr->Boolean", AtomicReductor)
-	parser.SetReduction("BooleanExpr->(BooleanExpr)", InBettwenExtractorReductor)
-	parser.SetReduction("BooleanExpr->!Boolean", InFrontOperatorReductor)
+	parser.SetReduction("Boolean->(BooleanExpr)", InBettwenExtractorReductor)
+	parser.SetReduction("Boolean->!Boolean", InFrontOperatorReductor)
 	parser.SetReduction("Boolean->boolean", AtomicReductor)
 
 	// DumpParser(*parser, "")

@@ -51,10 +51,10 @@ func init() {
 
 	BooleanGrammar := NewGrammar(BooleanExpr)
 	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{BooleanExpr, And, BooleanExpr})
-	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{Not, Boolean})
 	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{BooleanExpr, Or, BooleanExpr})
-	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{LP, BooleanExpr, RP})
 	BooleanGrammar.AddProduction(BooleanExpr, []IGrammarSymbol{Boolean})
+	BooleanGrammar.AddProduction(Boolean, []IGrammarSymbol{Not, Boolean})
+	BooleanGrammar.AddProduction(Boolean, []IGrammarSymbol{LP, BooleanExpr, RP})
 	BooleanGrammar.AddProduction(Boolean, []IGrammarSymbol{boolean})
 
 	HulkProgramGrammar = GrammarUnion([]IGrammar{ArithMeticGrammar, BooleanGrammar}, "HulkProgram")
