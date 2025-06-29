@@ -1,17 +1,21 @@
 package main
 
 import (
-	. "hulk.com/app/generator"
+	"fmt"
+
+	. "hulk.com/app/filesystem"
+	. "hulk.com/app/lgen"
 )
 
 func main() {
-	input := NewProjectInput{
-		TokenTypes: []string{
-			"LiteralNumber",
-			"LiteralString",
-		},
-		Name: "LGEN",
+	file_reader, _ := NewFileReader("code.hulk")
+	code, _ := file_reader.ReadFile()
+	lexer := LGENInterpreter
+	lexer.LoadCode(code)
+	for lexer.Next() {
+		fmt.Println(lexer.Current())
 	}
-	path := "../LGEN"
-	BuildProject(path, input)
+	// for r := rune(0); r < rune(256); r++ {
+	// 	fmt.Println(r, ":", string(r))
+	// }
 }
