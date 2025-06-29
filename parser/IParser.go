@@ -16,4 +16,8 @@ type IParser interface {
 	SetReduction(reduction_id string, reductor func(asts []IAST, new_symbol string) IAST)
 	// The symbol to mark the end of the stack
 	EndMarker() string
+	// Gets the action table
+	ActionTable() map[string]map[string]ActionStruct
+	// Gets the Reduce table
+	ReduceTable() map[string]map[string]ReduceStruct
 }
