@@ -41,7 +41,7 @@ func (interpreter *Interpreter) Execute(code string) {
 		}
 		interpreter.parser.Parse(interpreter.lexer.Current(), interpreter.error_collector)
 	}
-	EOF := NewToken(interpreter.lexer.Current().Line(), interpreter.lexer.Current().Column()+len(interpreter.lexer.Current().Text()), interpreter.parser.EndMarker(), SymbolToken)
+	EOF := NewToken(interpreter.lexer.Current().Line(), interpreter.lexer.Current().Column()+len(interpreter.lexer.Current().Text()), interpreter.parser.EndMarker(), EndToken)
 	interpreter.parser.Parse(EOF, interpreter.error_collector)
 	code_result := interpreter.parser.AST().Eval(nil, interpreter.error_collector)
 	if len(interpreter.error_collector.Errors()) == 0 {

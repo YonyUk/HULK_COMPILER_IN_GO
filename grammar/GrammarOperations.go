@@ -22,6 +22,24 @@ func GrammarUnion(grammars []IGrammar, start_symbol_id string) IGrammar {
 	return g_result
 }
 
+func AttributedGrammarUnion(grammars []IAttributedGrammar, start_symbol_id string) IAttributedGrammar {
+	if len(grammars) < 2 {
+		panic("grammars must have at least two elements")
+	}
+	start_symbol := NewGrammarSymbol(start_symbol_id, NonTerminal, false)
+	g_result := NewAttributedGrammar(start_symbol)
+	for _, g := range grammars {
+		for _, nt := range g.NonTerminals() {
+			for _, production := range g.GetProductions(nt) {
+				production_id := g.GetProductionId(nt.Symbol(), Map(production, func(s IGrammarSymbol) string { return s.Symbol() }))
+				rule, _ := g.GetProductionRule(production_id)
+				g_result.AddProduction(nt, production, rule)
+			}
+		}
+	}
+	return g_result
+}
+
 func AugmentGrammar(g IGrammar) IGrammar {
 	new_start_symbol := NewGrammarSymbol(g.StartSymbol().Symbol()+"_new_start", NonTerminal, false)
 	g_result := NewGrammar(new_start_symbol)
