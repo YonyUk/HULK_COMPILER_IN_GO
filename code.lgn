@@ -1,5 +1,6 @@
 token Keyword = [
     "print",
     "let",
-    "out"
+    "out",
+    "self"
 ]

@@ -97,4 +97,21 @@ func init() {
 		seq.Items = append(seq.Items, word)
 		return seq
 	})
+
+	// // TOKEN ----> TOKEN_DECLARATION = RIGHT_REGULAR_GRAMMAR
+	// TokenGrammar.AddProduction(TOKEN, []IGrammarSymbol{TOKEN_DECLARATION, Equal, RIGHT_REGULAR_GRAMMAR}, func(i []IAST, s string) IAST {
+	// 	if i[0].Symbol() != TOKEN_DECLARATION.Symbol() {
+	// 		msg := "Unexpected symbol '" + i[0].Symbol() + "', expected " + TOKEN_DECLARATION.Symbol()
+	// 		panic(msg)
+	// 	}
+	// 	if i[1].Symbol() != Equal.Symbol() {
+	// 		msg := "Unexpected symbol '" + i[1].Symbol() + "', expected " + Equal.Symbol()
+	// 		panic(msg)
+	// 	}
+	// 	if i[2].Symbol() != RIGHT_REGULAR_GRAMMAR.Symbol() {
+	// 		msg := "Unexpected symbol '" + i[2].Symbol() + "', expected " + RIGHT_REGULAR_GRAMMAR.Symbol()
+	// 		panic(msg)
+	// 	}
+
+	// })
 }

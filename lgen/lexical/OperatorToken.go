@@ -9,6 +9,8 @@ var OperatorTokenGrammar IGrammar
 func init() {
 	operators := []string{
 		"=",
+		"<",
+		">",
 	}
 	OperatorTokenGrammar = GetWordsGrammar(operators)
 }

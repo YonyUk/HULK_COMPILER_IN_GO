@@ -145,13 +145,13 @@ func (parser *ParserSLRFromAttributedGrammar) Parse(token IToken, collector IErr
 		msg := "expected "
 		for k, _ := range parser.action[parser.states_stack[len(parser.states_stack)-1].ID()] {
 			if _, err := IndexOf(parser.terminals, func(s string) bool { return s == k }); err == nil {
-				msg += k + ","
+				msg += "'" + k + "'" + ","
 			}
 		}
 		if ast.Symbol() == parser.endmarker {
 			collector.AddError(NewError("Unexpected EOF symbol "+","+msg, ast.Line(), ast.Column(), Gramatical))
 		} else {
-			collector.AddError(NewError("Unexpected symbol "+ast.Symbol()+","+msg, ast.Line(), ast.Column(), Gramatical))
+			collector.AddError(NewError("Unexpected symbol '"+ast.Symbol()+"',"+msg, ast.Line(), ast.Column(), Gramatical))
 		}
 	} else {
 		symbol_accepted := false
