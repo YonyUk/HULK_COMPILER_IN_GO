@@ -2,4 +2,4 @@ token Keyword = [
     "print",
     "let",
     "out"
-];
+]

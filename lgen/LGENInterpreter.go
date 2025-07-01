@@ -1,28 +1,30 @@
 package lgen
 
 import (
-	// . "hulk.com/app/ast"
 	// . "hulk.com/app/grammar"
 	. "hulk.com/app/interpreter"
 	. "hulk.com/app/lexer"
 	. "hulk.com/app/lexical_analisys"
-	. "hulk.com/app/lgen/lexical"
 
-	// . "hulk.com/app/lgen/sintax"
-	// . "hulk.com/app/parser"
+	. "hulk.com/app/lgen/grammar_symbols"
+	. "hulk.com/app/lgen/lexical"
+	. "hulk.com/app/lgen/sintax"
+	. "hulk.com/app/parser"
 	. "hulk.com/app/tokens"
 	. "hulk.com/app/tools"
 )
 
 var LGENInterpreter IInterpreter
+var LGENLexer ILexer
+var LGENParser IParser
 
 func init() {
-	LGENLexer := NewLexer()
+	LGENLexer = NewLexer()
 	LGENLexer.AddTokenExpression(KeywordToken, 0, KeywordTokenGrammar)
-	LGENLexer.AddTokenExpression(SymbolToken, 1, SymbolTokenGrammar)
-	LGENLexer.AddTokenExpression(OperatorToken, 2, OperatorTokenGrammar)
-	LGENLexer.AddTokenExpression(LiteralStringToken, 3, LiteralStringTokenGrammar)
-	LGENLexer.AddTokenExpression(VariableToken, 4, VariableTokenGrammar)
+	LGENLexer.AddTokenExpression(VariableToken, 1, VariableTokenGrammar)
+	LGENLexer.AddTokenExpression(SymbolToken, 2, SymbolTokenGrammar)
+	LGENLexer.AddTokenExpression(OperatorToken, 3, OperatorTokenGrammar)
+	LGENLexer.AddTokenExpression(LiteralStringToken, 4, LiteralStringTokenGrammar)
 
 	letters := []rune{}
 	for r := rune(65); r < rune(91); r++ {
@@ -50,7 +52,7 @@ func init() {
 		return err == nil
 	}))
 
-	// LGENParser := NewParserSLRFromAttributedGrammar(TokenGrammar,NewGrammarSymbol("$",Terminal,false),)
+	LGENParser = NewParserSLRFromAttributedGrammar(TokenGrammar, EndSymbol, AstEngine)
 
-	// LGENInterpreter = NewInterpreter(LGENLexer, analizer)
+	LGENInterpreter = NewInterpreter(LGENLexer, analizer, LGENParser, nil)
 }

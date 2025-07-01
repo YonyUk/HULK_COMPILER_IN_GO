@@ -18,7 +18,7 @@ func init() {
 		letters = append(letters, string(r))
 	}
 
-	Variable := NewGrammarSymbol("String", NonTerminal, false)
+	Variable := NewGrammarSymbol("Variable", NonTerminal, false)
 	Text := NewGrammarSymbol("Text", NonTerminal, false)
 	epsilon := NewGrammarSymbol("epsilon", Terminal, true)
 
@@ -27,5 +27,5 @@ func init() {
 		VariableTokenGrammar.AddProduction(Variable, []IGrammarSymbol{NewGrammarSymbol(letter, Terminal, false), Text})
 		VariableTokenGrammar.AddProduction(Text, []IGrammarSymbol{NewGrammarSymbol(letter, Terminal, false), Text})
 	}
-	VariableTokenGrammar.AddProduction(Variable, []IGrammarSymbol{epsilon})
+	VariableTokenGrammar.AddProduction(Text, []IGrammarSymbol{epsilon})
 }

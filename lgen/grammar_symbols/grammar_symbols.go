@@ -11,7 +11,7 @@ var STRING_LIST IGrammarSymbol
 var TOKEN_DECLARATION IGrammarSymbol
 
 // Terminals
-var Token IGrammarSymbol
+var TokenKeyword IGrammarSymbol
 var Text IGrammarSymbol
 var Comma IGrammarSymbol
 var DotComma IGrammarSymbol
@@ -19,6 +19,7 @@ var OpenCorchet IGrammarSymbol
 var ClosedCorchet IGrammarSymbol
 var Equal IGrammarSymbol
 var Variable IGrammarSymbol
+var EndSymbol IGrammarSymbol
 
 func init() {
 	TOKEN = NewGrammarSymbol("TOKEN", NonTerminal, false)
@@ -28,10 +29,11 @@ func init() {
 
 	Variable = NewGrammarSymbol("variable", Terminal, false)
 	Equal = NewGrammarSymbol("=", Terminal, false)
-	Token = NewGrammarSymbol("token", Terminal, false)
+	TokenKeyword = NewGrammarSymbol("token", Terminal, false)
 	Text = NewGrammarSymbol("Text", Terminal, false)
 	Comma = NewGrammarSymbol(",", Terminal, false)
 	DotComma = NewGrammarSymbol(";", Terminal, false)
 	OpenCorchet = NewGrammarSymbol("[", Terminal, false)
 	ClosedCorchet = NewGrammarSymbol("]", Terminal, false)
+	EndSymbol = NewGrammarSymbol("$", Terminal, false)
 }
