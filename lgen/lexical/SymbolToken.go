@@ -14,6 +14,8 @@ func init() {
 		",",
 		"--->",
 		"|",
+		"(",
+		")",
 	}
 	SymbolTokenGrammar = GetWordsGrammar(symbols)
 }

@@ -1,6 +1,1 @@
-token Keyword = [
-    "print",
-    "let",
-    "out",
-    "self"
-]
+token Keyword = grammar NumberGrammar (Number) = <Number> ---> "0"

@@ -9,6 +9,8 @@ var KeywordTokenGrammar IGrammar
 func init() {
 	keywords := []string{
 		"token",
+		"grammar",
+		"epsilon",
 	}
 	KeywordTokenGrammar = GetWordsGrammar(keywords)
 }
