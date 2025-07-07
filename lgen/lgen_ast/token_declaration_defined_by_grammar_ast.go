@@ -11,9 +11,11 @@ import (
 type TOKEN_DECLARATION_DEFINED_BY_GRAMMAR_AST struct {
 	BaseAST
 	TokenGrammar IGrammar
+	TokenName    string
+	GrammarName  string
 }
 
-func NewTokenDeclarationDefinedByGrammarAST(symbol string, line int, column int, value interface{}) *TOKEN_DECLARATION_DEFINED_BY_GRAMMAR_AST {
+func NewTokenDeclarationDefinedByGrammarAST(symbol string, line int, column int) *TOKEN_DECLARATION_DEFINED_BY_GRAMMAR_AST {
 	return &TOKEN_DECLARATION_DEFINED_BY_GRAMMAR_AST{
 		BaseAST: BaseAST{
 			Line:   line,
@@ -21,6 +23,8 @@ func NewTokenDeclarationDefinedByGrammarAST(symbol string, line int, column int,
 			Symbol: symbol,
 		},
 		TokenGrammar: nil,
+		TokenName:    "",
+		GrammarName:  "",
 	}
 }
 

@@ -10,9 +10,10 @@ import (
 type RIGHT_REGULAR_GRAMMAR_AST struct {
 	BaseAST
 	RegularGrammar IGrammar
+	GrammarName string
 }
 
-func NewRightRegularGrammar(symbol string, line int, column int) *RIGHT_REGULAR_GRAMMAR_AST {
+func NewRightRegularGrammarAST(symbol string, line int, column int) *RIGHT_REGULAR_GRAMMAR_AST {
 	return &RIGHT_REGULAR_GRAMMAR_AST{
 		BaseAST: BaseAST{
 			Line:   line,
@@ -20,6 +21,7 @@ func NewRightRegularGrammar(symbol string, line int, column int) *RIGHT_REGULAR_
 			Symbol: symbol,
 		},
 		RegularGrammar: nil,
+		GrammarName: "",
 	}
 }
 

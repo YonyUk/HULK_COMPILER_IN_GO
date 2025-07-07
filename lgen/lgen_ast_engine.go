@@ -42,6 +42,9 @@ func operator_aste_engine(token IToken) IAST {
 	case ">":
 		return NewAtomicAST(">", token.Line(), token.Column(), ">")
 
+	case "|":
+		return NewAtomicAST("|", token.Line(), token.Column(), "|")
+
 	default:
 		panic("Unkown symbol " + token.Text())
 
@@ -86,6 +89,9 @@ func symbol_ast_engine(token IToken) IAST {
 
 	case ")":
 		return NewAtomicAST(")", token.Line(), token.Column(), ")")
+
+	case ":":
+		return NewAtomicAST(":", token.Line(), token.Column(), ":")
 
 	default:
 		panic("Unknown symbol: " + token.Text())

@@ -16,6 +16,7 @@ type Lexer struct {
 	token_extractor ITokenExtractor
 	priorities      map[int]TokenType
 	current_token   IToken
+	last_token      IToken
 	line            int
 	column          int
 }
@@ -54,8 +55,10 @@ func (l *Lexer) Next() bool {
 	}
 	next := len(l.code) > 0
 	last_types := []TokenType{}
-	walked := true
-	l.token_extractor = NewTokenExtractor(l.priorities)
+	walked := next
+	if l.token_extractor == nil {
+		l.token_extractor = NewTokenExtractor(l.priorities)
+	}
 	for walked && len(l.code) > 0 {
 		current_types := []TokenType{}
 		walked = false
@@ -81,6 +84,7 @@ func (l *Lexer) Next() bool {
 			}
 		}
 		if !walked {
+
 			if l.text_pointer == 0 {
 				if l.code[l.text_pointer] != ' ' && l.code[l.text_pointer] != '\n' {
 					l.current_token = l.token_extractor.GetToken(last_types, l.line, l.column, string(l.code[0]))
@@ -105,6 +109,10 @@ func (l *Lexer) Next() bool {
 			}
 		}
 	}
+	if l.last_token != nil && l.last_token.Line() == l.current_token.Line() && l.last_token.Column() == l.current_token.Column() {
+		return false
+	}
+	l.last_token = l.current_token
 	return next
 }
 

@@ -37,6 +37,7 @@ var Or IGrammarSymbol
 var LessThan IGrammarSymbol
 var GreaterThan IGrammarSymbol
 var Epsilon IGrammarSymbol
+var DoubleDot IGrammarSymbol
 
 func init() {
 	TOKEN = NewGrammarSymbol("TOKEN", NonTerminal, false)
@@ -49,7 +50,7 @@ func init() {
 	GRAMMAR_PRODUCTION = NewGrammarSymbol("GRAMMAR_PRODUCTION", NonTerminal, false)
 	RIGHT_REGULAR_GRAMMAR_PRODUCTION = NewGrammarSymbol("RIGHT_REGULAR_GRAMMAR_PRODUCTION", NonTerminal, false)
 	GRAMMAR_PRODUCTION_SEQUENCE = NewGrammarSymbol("GRAMMAR_PRODUCTION_SEQUENCE", NonTerminal, false)
-	RIGHT_REGULAR_GRAMMAR_PRODUCTION_SEQUENCE = NewGrammarSymbol("RIGHT_REGULAR_GRAMMAR_PRODUCTION", NonTerminal, false)
+	RIGHT_REGULAR_GRAMMAR_PRODUCTION_SEQUENCE = NewGrammarSymbol("RIGHT_REGULAR_GRAMMAR_PRODUCTION_SEQUENCE", NonTerminal, false)
 	GRAMMAR_DECLARATION = NewGrammarSymbol("GRAMMAR_DECLARATION", NonTerminal, false)
 	RIGHT_REGULAR_GRAMMAR_DERIVATION_SEQUENCE = NewGrammarSymbol("RIGHT_REGULAR_GRAMMAR_DERIVATION_SEQUENCE", NonTerminal, false)
 
@@ -70,4 +71,5 @@ func init() {
 	OpenParent = NewGrammarSymbol("(", Terminal, false)
 	ClosedParent = NewGrammarSymbol(")", Terminal, false)
 	Epsilon = NewGrammarSymbol("epsilon", Terminal, false)
+	DoubleDot = NewGrammarSymbol(":", Terminal, false)
 }

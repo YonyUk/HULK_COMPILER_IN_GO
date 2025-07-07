@@ -11,6 +11,7 @@ func init() {
 		"=",
 		"<",
 		">",
+		"|",
 	}
 	OperatorTokenGrammar = GetWordsGrammar(operators)
 }

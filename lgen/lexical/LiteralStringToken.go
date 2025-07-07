@@ -17,6 +17,7 @@ func init() {
 	for r := rune(48); r < rune(58); r++ {
 		letters = append(letters, string(r))
 	}
+	letters = append(letters, "\n", "\t")
 	letters = append(letters, " ")
 	String := NewGrammarSymbol("String", NonTerminal, false)
 	Text := NewGrammarSymbol("Text", NonTerminal, false)

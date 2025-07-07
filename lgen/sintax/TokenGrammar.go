@@ -46,12 +46,14 @@ func init() {
 			msg := "Unexpected symbol: '" + i[2].Symbol() + "', expected " + RIGHT_REGULAR_GRAMMAR.Symbol()
 			panic(msg)
 		}
-		decl, _ := i[0].(*TOKEN_DECLARATION_DEFINED_BY_GRAMMAR_AST)
-		token_grammar_ast, _ := i[2].(*RIGHT_REGULAR_GRAMMAR_AST)
-		token_grammar := token_grammar_ast.RegularGrammar
-		decl.TokenGrammar = token_grammar
-		decl.UpdateSymbol(s)
-		return decl
+		decl, _ := i[0].(*TOKEN_DECLARATION_AST)
+		token_by_grammar_ast := NewTokenDeclarationDefinedByGrammarAST(TOKEN_DEFINED_BY_GRAMMAR.Symbol(), i[0].Line(), i[0].Column())
+		grammar_ast, _ := i[2].(*RIGHT_REGULAR_GRAMMAR_AST)
+		token_by_grammar_ast.TokenGrammar = grammar_ast.RegularGrammar
+		token_by_grammar_ast.TokenName = decl.TokenName
+		token_by_grammar_ast.GrammarName = grammar_ast.GrammarName
+		token_by_grammar_ast.UpdateSymbol(s)
+		return token_by_grammar_ast
 	})
 
 	// TOKEN_DEFINED_BY_LIST ----> TOKEN_DECLARATION = STRING_LIST
@@ -68,12 +70,14 @@ func init() {
 			msg := "Unexpected symbol: '" + i[2].Symbol() + "', expected " + STRING_LIST.Symbol()
 			panic(msg)
 		}
-		decl, _ := i[0].(*TOKEN_DECLARATION_DEFINED_BY_LIST_AST)
+		decl, _ := i[0].(*TOKEN_DECLARATION_AST)
+		token_by_list_ast := NewTokenDeclarationDefinedByListAST(TOKEN_DEFINED_BY_LIST.Symbol(), i[0].Line(), i[0].Column())
 		string_sequence, _ := i[2].(*STRING_SEQUENCE_AST)
 		tokens := string_sequence.Items
-		decl.Tokens = tokens
-		decl.UpdateSymbol(s)
-		return decl
+		token_by_list_ast.Tokens = tokens
+		token_by_list_ast.TokenName = decl.TokenName
+		token_by_list_ast.UpdateSymbol(s)
+		return token_by_list_ast
 	})
 
 	// TOKEN_DECLARATION ----> Token Variable
@@ -154,14 +158,17 @@ func init() {
 			msg := "Unexpected symbol '" + i[2].Symbol() + "', expected " + RIGHT_REGULAR_GRAMMAR_PRODUCTION_SEQUENCE.Symbol()
 			panic(msg)
 		}
-		decl, _ := i[0].(*RIGHT_REGULAR_GRAMMAR_AST)
+		decl, _ := i[0].(*GRAMMAR_DECLARATION_AST)
+		regular_grammmar_ast := NewRightRegularGrammarAST(RIGHT_REGULAR_GRAMMAR.Symbol(), i[0].Line(), i[0].Column())
 		productions_sequence, _ := i[2].(*RIGHT_REGULAR_GRAMMAR_PRODUCTION_SEQUENCE_AST)
 		productions := productions_sequence.Productions
 		for _, production := range productions {
-			decl.RegularGrammar.AddProduction(production.Head, production.Production)
+			decl.GrammarValue.AddProduction(production.Head, production.Production)
 		}
-		decl.UpdateSymbol(s)
-		return decl
+		regular_grammmar_ast.RegularGrammar = decl.GrammarValue
+		regular_grammmar_ast.GrammarName = decl.GrammarName
+		regular_grammmar_ast.UpdateSymbol(s)
+		return regular_grammmar_ast
 	})
 
 	// GRAMMAR_DECLARATION ----> grammar variable ( Text )

@@ -21,6 +21,7 @@ func NewParserSLRFromAttributedGrammar(g IAttributedGrammar, endmarker IGrammarS
 	G := AugmentAttributedGrammar(g)
 	G.MakeFirstsAndFollows(endmarker)
 
+	fmt.Println()
 	action := make(map[string]map[string]ActionStruct)
 	reduce := make(map[string]map[string]ReduceStruct)
 	states := GetCanonicalLR0CollectionFromAttributed(G)

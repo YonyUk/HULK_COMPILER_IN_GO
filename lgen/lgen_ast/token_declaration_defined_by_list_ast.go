@@ -12,14 +12,15 @@ type TOKEN_DECLARATION_DEFINED_BY_LIST_AST struct {
 	TokenName string
 }
 
-func NewTokenDeclarationAST(symbol string, line int, column int) *TOKEN_DECLARATION_DEFINED_BY_LIST_AST {
+func NewTokenDeclarationDefinedByListAST(symbol string, line int, column int) *TOKEN_DECLARATION_DEFINED_BY_LIST_AST {
 	return &TOKEN_DECLARATION_DEFINED_BY_LIST_AST{
 		BaseAST: BaseAST{
 			Symbol: symbol,
 			Line:   line,
 			Column: column,
 		},
-		Tokens: []string{},
+		Tokens:    []string{},
+		TokenName: "",
 	}
 }
 
